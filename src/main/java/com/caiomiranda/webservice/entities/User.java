@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -4975286930650076266L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -74,6 +74,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	// Comparar objetos:
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
