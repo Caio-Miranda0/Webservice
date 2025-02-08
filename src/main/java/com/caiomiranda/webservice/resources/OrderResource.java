@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.caiomiranda.webservice.OrderService;
 import com.caiomiranda.webservice.entities.Order;
+import com.caiomiranda.webservice.servicies.OrderService;
 
 @RestController
 @RequestMapping(value = "/orders")
