@@ -9,9 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.caiomiranda.webservice.entities.Category;
 import com.caiomiranda.webservice.entities.Order;
 import com.caiomiranda.webservice.entities.User;
 import com.caiomiranda.webservice.entities.enums.OrderStatus;
+import com.caiomiranda.webservice.repositories.CategoryRepository;
 import com.caiomiranda.webservice.repositories.OrderRepository;
 import com.caiomiranda.webservice.repositories.UserRepository;
 
@@ -24,6 +26,9 @@ public class TestConfiguration implements CommandLineRunner {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -44,6 +49,13 @@ public class TestConfiguration implements CommandLineRunner {
 		this.userRepository.saveAll(user);
 		this.orderRepository.saveAll(orders);
 
+		List<Category> categories = new ArrayList<>();
+		categories.add(new Category(null, "Livros"));
+		categories.add(new Category(null, "Brinquedos"));
+		categories.add(new Category(null, "Eletrônicos"));
+		categories.add(new Category(null, "Ferramentas"));
+
+		categoryRepository.saveAll(categories);
 	}
 
 }
