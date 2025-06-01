@@ -2,7 +2,9 @@ package com.caiomiranda.Webservice.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.caiomiranda.Webservice.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,14 +35,22 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id")
 	private User client;
 
+	@OneToMany(mappedBy = "orderItemPK.order")
+	private Set<OrderItem> items = new HashSet<>();
+
 	public Order() {
 	}
 
 	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		this.id = id;
 		this.moment = moment;
-		setOrderStatus(orderStatus);;
+		setOrderStatus(orderStatus);
+		;
 		this.client = client;
+	}
+
+	public Set<OrderItem> getItems() {
+		return items;
 	}
 
 	public Long getId() {
@@ -66,12 +77,14 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 
-	public OrderStatus getOrderStatus() { // Quando precisarmos apresentar o atributo orderStatus, vamos apresentar ele como String.
+	public OrderStatus getOrderStatus() { // Quando precisarmos apresentar o atributo orderStatus, vamos apresentar ele
+											// como String.
 		return OrderStatus.valueOf(orderStatus);
 	}
 
-	public void setOrderStatus(OrderStatus orderStatus) { // Para atribuir o valor, recebemos manualmente 1 OrderStatus e convertemos em Integer.
-		if(orderStatus != null) { // Programação defensiva, pois se for null, não terá número associado.
+	public void setOrderStatus(OrderStatus orderStatus) { // Para atribuir o valor, recebemos manualmente 1 OrderStatus
+															// e convertemos em Integer.
+		if (orderStatus != null) { // Programação defensiva, pois se for null, não terá número associado.
 			this.orderStatus = orderStatus.getCode();
 		}
 	}
