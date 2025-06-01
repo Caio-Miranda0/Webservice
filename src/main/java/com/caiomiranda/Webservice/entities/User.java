@@ -9,15 +9,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity // Mapeando a classe User para que o JPA transforme essa entidade em uma tabela no modelo relacional de dados.
-@Table(name = "tb_user") // nomeando a tabela para não haver conflito com a palavra reservada User do H2.
+@Entity // A entidade User será uma tabela do banco de dados relacional
+@Table(name = "tb_user") // Nomeia a tabela
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id // Indicando qual será a PK da tabela.
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Definindo a forma como essa PK será gerada.
-	private Integer id;
+	@Id // Identifica o atributo que será a PK da tabela
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Define a estratégia de geração da PK.
+	private Long id;
 	private String name;
 	private String email;
 	private String phone;
@@ -26,7 +26,7 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(Integer id, String name, String email, String phone, String password) {
+	public User(Long id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -34,11 +34,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
