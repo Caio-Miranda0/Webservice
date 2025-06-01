@@ -3,10 +3,20 @@ package com.caiomiranda.Webservice.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity // Mapeando a classe User para que o JPA transforme essa entidade em uma tabela no modelo relacional de dados.
+@Table(name = "tb_user") // nomeando a tabela para não haver conflito com a palavra reservada User do H2.
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id // Indicando qual será a PK da tabela.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Definindo a forma como essa PK será gerada.
 	private Integer id;
 	private String name;
 	private String email;
