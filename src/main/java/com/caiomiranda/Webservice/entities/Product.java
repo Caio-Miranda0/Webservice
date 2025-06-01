@@ -1,7 +1,9 @@
 package com.caiomiranda.Webservice.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +24,7 @@ public class Product implements Serializable {
 	private Double price;
 	private String imgUrl;
 
-	// private List<Category> categories = new ArrayList<>();
+	private Set<Category> categories = new HashSet<>();
 
 	public Product() {
 	}
@@ -74,7 +76,11 @@ public class Product implements Serializable {
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-
+	
+	public Set<Category> getCategories(){
+		return categories;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
